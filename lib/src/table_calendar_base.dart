@@ -31,6 +31,8 @@ class TableCalendarBase extends StatefulWidget {
   final SimpleSwipeConfig simpleSwipeConfig;
   final Map<CalendarFormat, String> availableCalendarFormats;
   final SwipeCallback? onVerticalSwipe;
+  final List<int> weekendDays;
+  final bool hideWeekendDays;
   final void Function(DateTime focusedDay)? onPageChanged;
   final void Function(PageController pageController)? onCalendarCreated;
 
@@ -56,6 +58,11 @@ class TableCalendarBase extends StatefulWidget {
     this.pageAnimationCurve = Curves.easeOut,
     this.startingDayOfWeek = StartingDayOfWeek.sunday,
     this.availableGestures = AvailableGestures.all,
+    this.weekendDays = const [
+      DateTime.saturday,
+      DateTime.sunday,
+    ],
+    this.hideWeekendDays = true,
     this.simpleSwipeConfig = const SimpleSwipeConfig(
       verticalThreshold: 25.0,
       swipeDetectionBehavior: SwipeDetectionBehavior.continuousDistinct,
@@ -218,6 +225,8 @@ class _TableCalendarBaseState extends State<TableCalendarBase> {
               dowDecoration: widget.dowDecoration,
               rowDecoration: widget.rowDecoration,
               tableBorder: widget.tableBorder,
+              weekendDays: widget.weekendDays,
+              hideWeekendDays: widget.hideWeekendDays,
               onPageChanged: (index, focusedMonth) {
                 if (!_pageCallbackDisabled) {
                   if (!isSameDay(_focusedDay, focusedMonth)) {

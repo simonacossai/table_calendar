@@ -103,6 +103,9 @@ class TableCalendar<T> extends StatefulWidget {
   /// When set to true, `TableCalendar` will fill available height.
   final bool shouldFillViewport;
 
+  /// When set to true, `TableCalendar` will fill available width and hide weekendDays.
+  final bool hideWeekendDays;
+
   /// Used for setting the height of `TableCalendar`'s rows.
   final double rowHeight;
 
@@ -224,6 +227,7 @@ class TableCalendar<T> extends StatefulWidget {
     this.pageAnimationEnabled = true,
     this.sixWeekMonthsEnforced = false,
     this.shouldFillViewport = false,
+    this.hideWeekendDays = true,
     this.rowHeight = 52.0,
     this.daysOfWeekHeight = 16.0,
     this.formatAnimationDuration = const Duration(milliseconds: 200),
@@ -484,6 +488,8 @@ class _TableCalendarState<T> extends State<TableCalendar<T>> {
             availableGestures: widget.availableGestures,
             firstDay: widget.firstDay,
             lastDay: widget.lastDay,
+            weekendDays: widget.weekendDays,
+            hideWeekendDays: widget.hideWeekendDays,
             startingDayOfWeek: widget.startingDayOfWeek,
             dowDecoration: widget.daysOfWeekStyle.decoration,
             rowDecoration: widget.calendarStyle.rowDecoration,

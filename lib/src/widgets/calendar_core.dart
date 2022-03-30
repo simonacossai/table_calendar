@@ -29,6 +29,8 @@ class CalendarCore extends StatelessWidget {
   final PageController? pageController;
   final ScrollPhysics? scrollPhysics;
   final _OnCalendarPageChanged onPageChanged;
+  final List<int> weekendDays;
+  final bool hideWeekendDays;
 
   const CalendarCore({
     Key? key,
@@ -51,6 +53,11 @@ class CalendarCore extends StatelessWidget {
     this.rowDecoration,
     this.tableBorder,
     this.scrollPhysics,
+    this.weekendDays = const [
+      DateTime.saturday,
+      DateTime.sunday,
+    ],
+    this.hideWeekendDays = true,
   })  : assert(!dowVisible || (dowHeight != null && dowBuilder != null)),
         super(key: key);
 
@@ -72,6 +79,8 @@ class CalendarCore extends StatelessWidget {
             : null;
 
         return CalendarPage(
+          hideWeekendDays: hideWeekendDays,
+          weekendDays: weekendDays,
           visibleDays: visibleDays,
           dowVisible: dowVisible,
           dowDecoration: dowDecoration,
